@@ -6,7 +6,7 @@ Configuration is via environment variables, and an rclone.conf remote configurat
 
 ENVIRONMENT VARIABLES
 
- * `SHARE` - Define an SMB share. Format is identical to dperson/samba: "<name;/path>[;browse;readonly;guest;users;admins;writelist;comment]"
+ * `SHARE` - Define an SMB share. Format is identical to dperson/samba: name; share path; browse; readonly; guest; users; admins; writelist; comment;
  * `TZ` - Set timezone
  * `USER` - Define a user for share access (username;password)
  * `CACHE_MAX` - Set max size of VFC cache
