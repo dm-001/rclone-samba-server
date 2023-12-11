@@ -46,22 +46,31 @@ version: "3.5"
 services:
 
   s3-samba:
+    # Build container direct from github
     build: https://github.com/dm-001/rclone-samba-server.git
     volumes:
+      # Ensure rclone.conf is mapped to /rclone/config/rclone.conf
       - "./data/config:/rclone/config"
+      # Allow persistence for cache data, just in case there's a crash or similar
       - "./data/cache:/rclone/cache"
     environment:
+      # Set timezone
       - "TZ=Australia/Melbourne"
+      # Create user for share access
       - "USER=myUser;myPassword"
+      # Define a share as per dperson/samba standard
       - "SHARE=remote;/mnt/remote;yes;no;no;myUser;none;;;"
+      # Define max cache data size
       - "CACHE_MAX=5G"
+      # Define bucket name to mount
       - "S3BUCKET=myS3bucket"
     restart: unless-stopped
     ports:
       - 445:445
-      - 139:139
-      - 138:138
+      - 139:139/udp
+      - 138:138/upd
     devices:
+      # Needed to handle s3 mount to local storage
       - "/dev/fuse:/dev/fuse:rwm"
     cap_add:
       - SYS_ADMIN
