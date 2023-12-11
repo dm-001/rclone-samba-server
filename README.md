@@ -14,7 +14,7 @@ version: "3.5"
 services:
 
   s3-samba:
-    build: https://github.com/mycompany/example.git
+    build: https://github.com/dm-001/rclone-samba-server.git
     volumes:
       - "./data/config:/rclone/config"
       - "./data/cache:/rclone/cache"
