@@ -21,6 +21,25 @@ Samba is implemented via [dperson/samba](https://github.com/dperson/samba) so al
 
 # Example Usage
 
+Create a rclone.conf file (rclone configuration) that contains the details of the S3 bucket you wish to mount. Put this file in it's own subfolder, and ensure the subfolder is mapped to /rclone/config in the container below.
+
+e.g.
+```
+[remote]
+type = s3
+provider = AWS
+access_key_id = myAccessKey
+secret_access_key = myReallySuperSecretKey
+region = ap-southeast-2
+acl = private
+server_side_encryption = AES256
+```
+
+
+Start the container, ensuring the environment variables have been defined and the rclone.conf folder is mapped to /rclone/config
+An example using docker compose is below.
+
+
 ```
 version: "3.5"
 
