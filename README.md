@@ -1,9 +1,10 @@
 # RClone S3 Samba Server
 This docker image mounts an S3 bucket via [rclone](https://rclone.org) and exposes that mount via SMB.
+Forked from https://gitlab.com/encircle360-oss/rclone-samba-server
 
 # Pending changes
 1. Remove need for container to run privileged (currently required for FUSE interaction and mount)
-2. 
+2. Extend readme to include rclone config requirements, cache options etc
 
 # Example Usage
 
