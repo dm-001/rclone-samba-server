@@ -9,7 +9,8 @@ ENVIRONMENT VARIABLES
  * `SHARE` - Define an SMB share. Format is identical to dperson/samba: name; share path; browse; readonly; guest; users; admins; writelist; comment;
  * `TZ` - Set timezone
  * `USER` - Define a user for share access (username;password)
- * `CACHE_MAX` - Set max size of VFC cache
+ * `CACHE_MAX_SIZE` - Set maximum size of VFC file cache
+ * `CACHE_REFRESH_TIME` - Set the maximum time file and dir info will be cached before checking for changes in s3
  * `S3BUCKET` - Name of, or name and subdirectory of, the S3 Bucket to mount and share
 
 Samba is implemented via [dperson/samba](https://github.com/dperson/samba) so all SMB configuration options from the dperson/samba container will also work for this container.
@@ -61,7 +62,9 @@ services:
       # Define a share as per dperson/samba standard
       - "SHARE=remote;/mnt/remote;yes;no;no;myUser;none;;;"
       # Define max cache data size
-      - "CACHE_MAX=5G"
+      - "CACHE_MAX_SIZE=5G"
+      # Define directory cache expiry time
+      - "CACHE_REFRESH_TIME=1m30s"
       # Define bucket name to mount
       - "S3BUCKET=myS3bucket"
     restart: unless-stopped
